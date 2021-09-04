@@ -36,6 +36,10 @@ public class DeptController {
 	public String showAddDept(@ModelAttribute("deptForm")  Department dept ,
 			ModelMap model ){
 		model.addAttribute("deptList", deptService.loadDeptBasicInfo());
+		if(dept.getId()==null)
+			  model.addAttribute("success", "Success added department");
+			else
+			  model.addAttribute("success", "Success updated department");
 		try {
 			deptService.saveOrUpdate(dept);
 		}catch(Exception e){
@@ -44,10 +48,6 @@ public class DeptController {
 		model.addAttribute("employeeList", empService.loadEmpBasicInfo());
 		model.addAttribute("deptList", deptService.loadDeptBasicInfo());
 		model.addAttribute("deptForm", dept);
-		if(dept.getId()==null)
-			  model.addAttribute("success", "Success added department");
-			else
-			  model.addAttribute("success", "Success updated department");
 		return "dept";
 	}
 	
